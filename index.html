@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rojan's Finance Passport</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="passport">
+
+  <!-- BOARDING PASS HEADER -->
+  <div class="boarding-pass">
+    <div class="bp-main">
+      <div class="bp-eyebrow">Boarding Pass · Class of 2028</div>
+      <div class="bp-name">ROJAN THAPA MAGAR</div>
+      <div class="bp-route">
+        <div class="bp-city">KTM <small>Kathmandu</small></div>
+        <div class="bp-plane">✈</div>
+        <div class="bp-city">BHX <small>Birmingham</small></div>
+      </div>
+      <div class="bp-grid">
+        <div class="bp-field"><span>Programme</span>BSc CS w/ AI</div>
+        <div class="bp-field"><span>Institution</span>BCU / BCUIC</div>
+        <div class="bp-field"><span>Graduation</span>2028</div>
+      </div>
+    </div>
+    <div class="bp-stub">
+      <div class="bp-seat">GATE<b id="stub-progress">0%</b></div>
+      <div class="bp-barcode"></div>
+    </div>
+  </div>
+
+  <!-- RUNWAY TO GRADUATION -->
+  <div class="runway-card">
+    <div class="runway-title">Runway to Graduation — Tuition Cleared</div>
+    <div class="runway-track">
+      <div class="runway-fill" id="runwayFill" style="width:0%"></div>
+      <div class="runway-plane" id="runwayPlane" style="left:0%">✈</div>
+    </div>
+    <div class="runway-labels">
+      <span>KTM · Year 1</span>
+      <span id="runwayAmount" class="mono">£0 / £35,920 paid</span>
+      <span>BHX · Graduate</span>
+    </div>
+  </div>
+
+  <!-- TUITION TRACKER -->
+  <div class="card">
+    <div class="card-head"><h2>🎓 Tuition Tracker</h2><span class="tag">£35,920 total</span></div>
+    <div class="bar-row">
+      <div class="bar-label"><span>Year 1 — £17,960</span></div>
+      <div class="pill-group" data-year="1">
+        <div class="pill" data-val="0">Not started</div>
+        <div class="pill" data-val="0.5">Partially paid</div>
+        <div class="pill" data-val="1">Paid</div>
+      </div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label"><span>Year 2 — £17,960</span></div>
+      <div class="pill-group" data-year="2">
+        <div class="pill" data-val="0">Not started</div>
+        <div class="pill" data-val="0.5">Partially paid</div>
+        <div class="pill" data-val="1">Paid</div>
+      </div>
+    </div>
+    <div class="total-line"><span>Tuition remaining</span><span class="mono" id="tuitionRemaining">£35,920</span></div>
+  </div>
+
+  <!-- MONTHLY BUDGET -->
+  <div class="card">
+    <div class="card-head"><h2>📅 Monthly Budget</h2><span class="tag" id="monthLabel"></span></div>
+    <div class="field-grid">
+      <label class="f"><span>Part-time job income (£)</span><input type="number" id="incJob" min="0"></label>
+      <label class="f"><span>Family support (£)</span><input type="number" id="incFam" min="0"></label>
+      <label class="f"><span>Scholarship (£)</span><input type="number" id="incSch" min="0"></label>
+      <label class="f"><span>Other income (£)</span><input type="number" id="incOth" min="0"></label>
+    </div>
+    <div class="total-line"><span>Total income</span><span class="mono" id="totalIncome">£0</span></div>
+
+    <div class="field-grid wide" style="margin-top:16px;">
+      <label class="f"><span>🏠 Rent</span><input type="number" id="expRent" min="0"></label>
+      <label class="f"><span>🍔 Food</span><input type="number" id="expFood" min="0"></label>
+      <label class="f"><span>🚌 Transport</span><input type="number" id="expTransport" min="0"></label>
+      <label class="f"><span>📱 Phone & internet</span><input type="number" id="expPhone" min="0"></label>
+      <label class="f"><span>📚 Study costs</span><input type="number" id="expStudy" min="0"></label>
+      <label class="f"><span>🎉 Entertainment</span><input type="number" id="expFun" min="0"></label>
+      <label class="f"><span>🛒 Miscellaneous</span><input type="number" id="expMisc" min="0"></label>
+    </div>
+    <div class="total-line"><span>Total living expenses</span><span class="mono" id="totalExpenses">£0</span></div>
+    <div class="total-line" style="color:var(--teal);"><span>Left over this month</span><span class="mono" id="leftover">£0</span></div>
+  </div>
+
+  <!-- GOALS: EMERGENCY / SAVINGS / INVESTMENTS -->
+  <div class="card">
+    <div class="stamp" id="stampEmergency">FUNDED<br>✓</div>
+    <div class="card-head"><h2>🚨 Emergency Fund</h2><span class="tag">Goal £1,500</span></div>
+    <label class="f"><span>Current balance (£)</span><input type="number" id="efBalance" min="0" style="max-width:200px;"></label>
+    <div class="bar-row" style="margin-top:12px;">
+      <div class="bar-label"><span>Progress</span><b id="efPct" class="mono">0%</b></div>
+      <div class="bar-bg"><div class="bar-fg" id="efBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="stamp" id="stampSavings">GOAL MET<br>✓</div>
+    <div class="card-head"><h2>💵 Long-Term Savings</h2><span class="tag">Goal £5,000</span></div>
+    <label class="f"><span>Current savings (£)</span><input type="number" id="lsBalance" min="0" style="max-width:200px;"></label>
+    <div class="bar-row" style="margin-top:12px;">
+      <div class="bar-label"><span>Progress</span><b id="lsPct" class="mono">0%</b></div>
+      <div class="bar-bg"><div class="bar-fg teal" id="lsBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><h2>📈 Investment Portfolio</h2><span class="tag">Goal £1,500–£3,000</span></div>
+    <div class="field-grid">
+      <label class="f"><span>Total portfolio value (£)</span><input type="number" id="invValue" min="0"></label>
+      <label class="f"><span>Total profit / loss (£)</span><input type="number" id="invPnl"></label>
+    </div>
+    <div class="bar-row" style="margin-top:12px;">
+      <div class="bar-label"><span>Progress toward £3,000</span><b id="invPct" class="mono">0%</b></div>
+      <div class="bar-bg"><div class="bar-fg teal" id="invBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- CAREER -->
+  <div class="card">
+    <div class="card-head"><h2>💻 Career Development</h2><span class="tag" id="careerTag">0 / 14</span></div>
+    <div class="check-grid" id="careerGrid"></div>
+  </div>
+
+  <!-- NET WORTH -->
+  <div class="card">
+    <div class="card-head"><h2>📊 Net Worth Tracker</h2></div>
+    <div class="field-grid wide">
+      <label class="f"><span>Cash (£)</span><input type="number" id="nwCash" min="0"></label>
+      <label class="f"><span>Debt (£)</span><input type="number" id="nwDebt" min="0"></label>
+    </div>
+    <div class="networth-grid" style="margin-top:14px;">
+      <div class="nw-box"><span>Emergency fund</span><b id="nwEf">£0</b></div>
+      <div class="nw-box"><span>Savings</span><b id="nwSav">£0</b></div>
+      <div class="nw-box"><span>Investments</span><b id="nwInv">£0</b></div>
+    </div>
+    <div class="nw-result">
+      <span>Net worth</span>
+      <b class="mono" id="nwTotal">£0</b>
+    </div>
+  </div>
+
+  <!-- GRADUATION VISION -->
+  <div class="card">
+    <div class="card-head"><h2>🎓 Graduation Vision — 2028</h2><span class="tag" id="visionTag">0 / 8</span></div>
+    <div class="check-grid" id="visionGrid"></div>
+  </div>
+
+  <!-- RULES -->
+  <div class="card">
+    <div class="card-head"><h2>🌟 Personal Rules</h2></div>
+    <ol class="rules-list" id="rulesList"></ol>
+  </div>
+
+  <div class="save-note">Autosaves to this browser · <button id="resetBtn">Reset all data</button></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
